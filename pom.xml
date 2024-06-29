@@ -12,6 +12,11 @@
      war（打包项目，用于容器（Tomcat、Jetty等）上部署）
     -->
     <packaging>pom</packaging>
+    <modules>
+        <module>admin</module>
+        <module>project</module>
+        <module>gateway</module>
+    </modules>
     <name>all</name>
     <description>短链接不参与打包父模块</description>
     <properties>
@@ -20,15 +25,16 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>3.0.2</spring-boot.version>
     </properties>
-    <!-- 在多模块项目中 -->
+    <!-- 在多模块项目中使用 dependencyManagement 只是声明没有真正引入，子模块可以定义选择 -->
+    <!-- 在多模块项目中使用 dependencies 引入并且子模块默认引入 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <type>pom</type> <!-- 依赖文件的扩展名-->
+                <scope>import</scope> <!-- 导入配置-->
             </dependency>
         </dependencies>
     </dependencyManagement>

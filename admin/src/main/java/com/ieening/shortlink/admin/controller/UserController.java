@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 用户管理层
@@ -36,5 +37,13 @@ public class UserController {
     @GetMapping("/api/shortlink/v1/actual/user/{username}")
     public Result<UserActualRespDTO> getActualUserByName(@PathVariable("username") String username) {
         return Results.success(BeanUtil.toBean(userService.getUserByUsername(username), UserActualRespDTO.class));
+    }
+
+    /**
+     * 根据用户名查询用户真实信息
+     */
+    @GetMapping("/api/shortlink/v1/actual/user/has-username")
+    public Result<Boolean> hasUsername(@RequestParam("username") String username) {
+        return Results.success(userService.hasUserName(username));
     }
 }

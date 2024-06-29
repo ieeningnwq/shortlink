@@ -30,4 +30,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDo> implements 
         BeanUtils.copyProperties(userDo, result);
         return result;
     }
+
+    @Override
+    public Boolean hasUserName(String username) {
+        LambdaQueryWrapper<UserDo> queryWrapper = Wrappers.lambdaQuery(UserDo.class).eq(UserDo::getUsername, username);
+        return baseMapper.selectOne(queryWrapper) != null;
+    }
 }

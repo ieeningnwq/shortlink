@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ieening.shortlink</groupId>
+    <artifactId>shortlink-all</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <!-- packaging 有三个取值：
+     pom（父类型使用，没有java代码也不执行，只是为了聚合工程传递依赖使用）；
+     jar（内部调用或者作为服务使用）
+     war（打包项目，用于容器（Tomcat、Jetty等）上部署）
+    -->
+    <packaging>pom</packaging>
+    <name>all</name>
+    <description>短链接不参与打包父模块</description>
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>3.0.2</spring-boot.version>
+    </properties>
+    <!-- 在多模块项目中 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

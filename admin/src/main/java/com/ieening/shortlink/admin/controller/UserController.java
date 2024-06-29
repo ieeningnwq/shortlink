@@ -2,6 +2,7 @@ package com.ieening.shortlink.admin.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ieening.shortlink.admin.common.convention.result.Result;
 import com.ieening.shortlink.admin.dto.resp.UserRespDTO;
 import com.ieening.shortlink.admin.service.UserService;
 
@@ -22,8 +23,13 @@ public class UserController {
      * 根据用户名查询用户信息
      */
     @GetMapping("/api/shortlink/v1/user/{username}")
-    public UserRespDTO getUserByName(@PathVariable("username") String username) {
-        return userService.getUserByUsername(username);
+    public Result<UserRespDTO> getUserByName(@PathVariable("username") String username) {
+        UserRespDTO result = userService.getUserByUsername(username);
+        if (result == null) {
+            return new Result<UserRespDTO>().setCode("-1").setMessage("用户查询为空");
+        } else {
+            return new Result<UserRespDTO>().setCode("0").setData(result);
+        }
     }
 
 }
